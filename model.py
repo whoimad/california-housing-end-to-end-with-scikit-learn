@@ -36,8 +36,13 @@ def load_housing() -> pd.DataFrame:
         with member:
             return pd.read_csv(member)
 
-# Step 2 - income_categories (not yet solved)
-# TODO: implement
+# Step 2 - income_categories
+def income_categories(df):
+    # TODO: pd.cut median_income with edges [0, 1.5, 3, 4.5, 6, inf] and labels 1..5; return an int Series.
+    edges = [0, 1.5, 3.0, 4.5, 6.0, np.inf]
+    labels = [1,2,3,4,5]
+    df_cut = pd.cut(df['median_income'], bins = edges, labels= labels)
+    return df_cut.astype(int)
 
 # Step 3 - stratified_split (not yet solved)
 # TODO: implement
