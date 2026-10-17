@@ -231,8 +231,13 @@ def bootstrap_rmse_ci(y_true, y_pred, n_boot=200, alpha=0.05, random_state=42):
     high = np.percentile(boot_rmses, 100 * (1 - alpha / 2))
     return float(low), float(high)
 
-# Step 19 - feature_importances (not yet solved)
-# TODO: implement
+# Step 19 - feature_importances
+def feature_importances(search, k=5):
+    best = search.best_estimator_
+    importances = best[-1].feature_importances_
+    names = best[0].get_feature_names_out()
+    ranked = sorted(zip(importances, names), key=lambda pair: pair[0], reverse=True)
+    return [(float(round(imp, 3)), str(name)) for imp, name in ranked[:k]]
 
 # Step 20 - worst_errors (not yet solved)
 # TODO: implement
