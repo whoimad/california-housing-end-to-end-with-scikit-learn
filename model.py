@@ -208,8 +208,11 @@ def random_search(pipeline, X, y, n_iter=5, cv=3, random_state=42):
     search.fit(X, y)
     return search
 
-# Step 17 - test_rmse (not yet solved)
-# TODO: implement
+# Step 17 - test_rmse
+def test_rmse(model, test_set):
+    X_test, y_test = split_features_labels(add_ratio_features(test_set))
+    predictions = model.predict(X_test)
+    return rmse(y_test, predictions)
 
 # Step 18 - bootstrap_rmse_ci (not yet solved)
 # TODO: implement
