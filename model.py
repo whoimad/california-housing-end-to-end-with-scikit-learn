@@ -258,6 +258,13 @@ def save_and_reload(model, path):
     joblib.dump(model, path)
     return joblib.load(path)
 
-# Step 22 - predict_new (not yet solved)
-# TODO: implement
+# Step 22 - predict_new
+NUMERIC = ["longitude", "latitude", "housing_median_age", "total_rooms",
+           "total_bedrooms", "population", "households", "median_income"]
+
+def predict_new(model, districts):
+    df = pd.DataFrame(districts)
+    df[NUMERIC] = df[NUMERIC].astype(float)
+    X = add_ratio_features(df)
+    return [float(round(p)) for p in model.predict(X)]
 
