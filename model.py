@@ -109,8 +109,13 @@ def numeric_pipeline():
     Pipeline = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
     return Pipeline
 
-# Step 9 - categorical_pipeline (not yet solved)
-# TODO: implement
+# Step 9 - categorical_pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+
+def categorical_pipeline():
+    Pipeline = make_pipeline(SimpleImputer(strategy="most_frequent", missing_values=pd.NA), OneHotEncoder(handle_unknown="ignore"))
+    return Pipeline
 
 # Step 10 - build_preprocessing (not yet solved)
 # TODO: implement
