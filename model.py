@@ -239,8 +239,16 @@ def feature_importances(search, k=5):
     ranked = sorted(zip(importances, names), key=lambda pair: pair[0], reverse=True)
     return [(float(round(imp, 3)), str(name)) for imp, name in ranked[:k]]
 
-# Step 20 - worst_errors (not yet solved)
-# TODO: implement
+# Step 20 - worst_errors
+# Predict on df, then return the k rows with the biggest |actual - predicted|, keeping the original row labels.
+def worst_errors(model, df, k=5):
+    X, y = split_features_labels(add_ratio_features(df))
+    predictions = model.predict(X)
+    result = pd.DataFrame(
+        {"actual": y, "predicted": predictions, "abs_error": (y - predictions).abs()},
+        index=df.index,
+    )
+    return result.sort_values("abs_error", ascending=False).head(k)
 
 # Step 21 - save_and_reload (not yet solved)
 # TODO: implement
